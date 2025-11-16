@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Models\Reminder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Note extends Model
 {
     use SoftDeletes;
+    use HasUuids;
 
     protected $fillable = [
         'user_id',

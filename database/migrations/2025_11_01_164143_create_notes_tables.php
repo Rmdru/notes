@@ -12,7 +12,7 @@ return new class extends Migration
     {
         if (! Schema::hasTable('notes')) {
             Schema::create('notes', function (Blueprint $table) {
-                $table->uuid();
+                $table->uuid('id');
                 $table->foreignId('user_id');
                 $table->foreignUuid('reminder_id')->nullable();
                 $table->string('title')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
 
         if (! Schema::hasTable('reminders')) {
             Schema::create('reminders', function (Blueprint $table) {
-                $table->uuid();
+                $table->uuid('id');
                 $table->foreignUuid('note_id');
                 $table->string('frequency');
                 $table->integer('interval')->default(1);
@@ -44,7 +44,7 @@ return new class extends Migration
 
         if (! Schema::hasTable('recurrances')) {
             Schema::create('recurrances', function (Blueprint $table) {
-                $table->uuid();
+                $table->uuid('id');
                 $table->foreignUuid('reminder_id');
                 $table->datetime('datetime');
                 $table->boolean('is_reminded')->default(false);
@@ -54,7 +54,7 @@ return new class extends Migration
 
         if (! Schema::hasTable('tag_note')) {
             Schema::create('tag_note', function (Blueprint $table) {
-                $table->uuid();
+                $table->uuid('id');
                 $table->foreignUuid('note_id');
                 $table->foreignUuid('tag_id');
                 $table->timestamps();
@@ -63,7 +63,7 @@ return new class extends Migration
 
         if (! Schema::hasTable('tags')) {
             Schema::create('tags', function (Blueprint $table) {
-                $table->uuid();
+                $table->uuid('id');
                 $table->string('name');
                 $table->string('color')->nullable();
                 $table->timestamps();
