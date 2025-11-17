@@ -14,7 +14,7 @@ class NoteController extends Controller
     {
         $validated = $request->validated();
 
-        if (! empty($validated['title']) && ! empty($validated['description'])) {
+        if (! empty($validated['title']) || ! empty($validated['description'])) {
             $validated['user_id'] = auth()->id();
             
             Note::create($validated);

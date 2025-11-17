@@ -5,7 +5,6 @@ import { type BreadcrumbItem } from '@/types';
 import { Form, Head } from '@inertiajs/vue3';
 import { PlusIcon, } from 'lucide-vue-next'
 import { InputGroup, InputGroupAddon, InputGroupButton } from '@/components/ui/input-group/index';
-import { ref } from 'vue';
 import { store } from '@/routes/notes';
 import { LoaderCircle } from 'lucide-vue-next';
 
@@ -15,6 +14,14 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: dashboard().url,
     },
 ];
+
+const handleTextareaKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' && ! event.shiftKey) {
+        event.preventDefault();
+        const form = (event.target as HTMLTextAreaElement).closest('form') as HTMLFormElement;
+        form?.requestSubmit();
+    }
+};
 </script>
 
 <template>
@@ -47,6 +54,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                                     class="flex field-sizing-content min-h-8 max-h-52 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base transition-[color,box-shadow] outline-none md:text-sm"
                                     placeholder="Create a note..."
                                     name="description"
+                                    @keydown="handleTextareaKeydown"
                                 />
                                 <InputGroupAddon align="block-end">
                                     <InputGroupButton
