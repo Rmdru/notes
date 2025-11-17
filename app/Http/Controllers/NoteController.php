@@ -14,9 +14,11 @@ class NoteController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['user_id'] = auth()->id();
-
-        Note::create($validated);
+        if (! empty($validated['title']) && ! empty($validated['description'])) {
+            $validated['user_id'] = auth()->id();
+            
+            Note::create($validated);
+        }
 
         return redirect()->route('dashboard');
     }
